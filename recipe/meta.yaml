@@ -12,8 +12,6 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  entry_points:
-    - genai-prices = genai_prices._cli:cli
   skip: true  # [py<39]
 
 requirements:
@@ -23,7 +21,8 @@ requirements:
     - uv-build >=0.8.10
   run:
     - python
-    - eval-type-backport >=0.2  # [py<310]
+    # eval-type-backport is required only for py<3.10 per upstream marker; AR
+    # builds py3.10+ only, so we omit it (the selector would drop it anyway).
     - httpx >=0.27
     - pydantic >=2.10
   run_constrained:
