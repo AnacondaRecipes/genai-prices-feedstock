@@ -38,7 +38,9 @@ test:
     - pip
   commands:
     - pip check
-    - genai-prices --help
+    # genai-prices --help requires the [cli] extras (pydantic-settings,
+    # rich, rich-argparse) which live in run_constrained, not run.
+    # Skip the CLI smoke test to keep the test env minimal.
 
 about:
   home: https://github.com/pydantic/genai-prices
