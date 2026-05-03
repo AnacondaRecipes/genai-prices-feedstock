@@ -1,0 +1,60 @@
+{% set name = "genai-prices" %}
+{% set version = "0.0.57" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 6e101e9c53975557ceffa237b0995787d81fe75aac12410f2898504188bcad89
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  entry_points:
+    - genai-prices = genai_prices._cli:cli
+  skip: true  # [py<39]
+
+requirements:
+  host:
+    - python
+    - pip
+    - uv-build >=0.8.10
+  run:
+    - python
+    - eval-type-backport >=0.2  # [py<310]
+    - httpx >=0.27
+    - pydantic >=2.10
+  run_constrained:
+    # CLI extra (https://github.com/pydantic/genai-prices/blob/v0.0.57/packages/python/pyproject.toml#L42-L46)
+    - pydantic-settings >=2.11
+    - rich >=14.3.2
+    - rich-argparse >=1.7.2
+
+test:
+  imports:
+    - genai_prices
+  requires:
+    - pip
+  commands:
+    - pip check
+    - genai-prices --help
+
+about:
+  home: https://github.com/pydantic/genai-prices
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Calculate prices for calling LLM inference APIs.
+  description: |
+    genai-prices is a Python library that calculates prices for calling
+    LLM inference APIs across different providers (OpenAI, Anthropic,
+    Google, AWS Bedrock, etc.). It also ships a CLI for ad-hoc lookups.
+  doc_url: https://github.com/pydantic/genai-prices
+  dev_url: https://github.com/pydantic/genai-prices
+
+extra:
+  recipe-maintainers:
+    - moritzwilksch
+    - xkong-anaconda
