@@ -1,5 +1,5 @@
 {% set name = "genai-prices" %}
-{% set version = "0.0.57" %}
+{% set version = "0.0.69" %}
 
 package:
   name: {{ name }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 6e101e9c53975557ceffa237b0995787d81fe75aac12410f2898504188bcad89
+  sha256: 80ca72c4b59b62ef986be3f04ea528bf4aaac4bc91e1c34f32f354c0c0b23d16
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   host:
@@ -21,9 +21,7 @@ requirements:
     - uv-build >=0.8.10
   run:
     - python
-    # eval-type-backport is required only for py<3.10 per upstream marker; AR
-    # builds py3.10+ only, so we omit it (the selector would drop it anyway).
-    - httpx >=0.27
+    - httpx2 >=2.0
     - pydantic >=2.10
   run_constrained:
     # CLI extra (https://github.com/pydantic/genai-prices/blob/v0.0.57/packages/python/pyproject.toml#L42-L46)
