@@ -18,7 +18,7 @@ requirements:
   host:
     - python
     - pip
-    - uv-build >=0.8.10
+    - uv-build >=0.8.10,<0.12
   run:
     - python
     - httpx2 >=2.0
