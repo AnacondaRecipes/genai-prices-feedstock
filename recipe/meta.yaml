@@ -1,5 +1,5 @@
 {% set name = "genai-prices" %}
-{% set version = "0.0.69" %}
+{% set version = "0.0.73" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 80ca72c4b59b62ef986be3f04ea528bf4aaac4bc91e1c34f32f354c0c0b23d16
+  sha256: ddad5b23dadd7aac8a58ab5af7506addb062114037e96427324703e50bc35077
 
 build:
   number: 0
@@ -18,7 +18,7 @@ requirements:
   host:
     - python
     - pip
-    - uv-build >=0.8.10
+    - uv-build >=0.8.10,<0.12
   run:
     - python
     - httpx2 >=2.0
