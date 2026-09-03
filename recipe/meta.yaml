@@ -1,5 +1,5 @@
 {% set name = "genai-prices" %}
-{% set version = "0.0.73" %}
+{% set version = "0.1.6" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: ddad5b23dadd7aac8a58ab5af7506addb062114037e96427324703e50bc35077
+  sha256: 802c1e4cc3ed5e70a09083b83af441a58d91f62e12768f7f1b6b26c98a33fcac
 
 build:
   number: 0
@@ -18,13 +18,14 @@ requirements:
   host:
     - python
     - pip
-    - uv-build >=0.8.10,<0.12
+    - hatchling
+    - uv-dynamic-versioning >=0.7.0
   run:
     - python
     - httpx2 >=2.0
     - pydantic >=2.10
   run_constrained:
-    # CLI extra (https://github.com/pydantic/genai-prices/blob/v0.0.57/packages/python/pyproject.toml#L42-L46)
+    # CLI extra (https://github.com/pydantic/genai-prices/blob/v0.1.6/packages/python/pyproject.toml#L42-L46)
     - pydantic-settings >=2.11
     - rich >=14.3.2
     - rich-argparse >=1.7.2
